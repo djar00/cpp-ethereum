@@ -136,7 +136,7 @@ namespace
 {
 	bigint expLengthAdjust(bigint _baseLength, bigint _expLength, bytesConstRef _in)
 	{
-		size_t const numConsideredBytes{min(_expLength, {32})};
+		size_t const numConsideredBytes(min(_expLength, {32}));
 		bigint expConsideredBytes{};
 		if (96 + _baseLength == bigint(size_t(96 + _baseLength)))
 			expConsideredBytes = parseBigEndianRightPadded(_in, size_t(96 + _baseLength), numConsideredBytes);
@@ -152,12 +152,12 @@ namespace
 
 ETH_REGISTER_PRECOMPILED_PRICER(modexp)(bytesConstRef _in)
 {
-	bigint const baseLength{parseBigEndianRightPadded(_in, 0, 32)};
-	bigint const expLength{parseBigEndianRightPadded(_in, 32, 32)};
-	bigint const modLength{parseBigEndianRightPadded(_in, 64, 32)};
+	bigint const baseLength(parseBigEndianRightPadded(_in, 0, 32));
+	bigint const expLength(parseBigEndianRightPadded(_in, 32, 32));
+	bigint const modLength(parseBigEndianRightPadded(_in, 64, 32));
 
-	bigint const maxLength{max(modLength, bigint(baseLength))};
-	bigint const adjustedExpLength{expLengthAdjust(baseLength, expLength, _in)};
+	bigint const maxLength(max(modLength, bigint(baseLength)));
+	bigint const adjustedExpLength(expLengthAdjust(baseLength, expLength, _in));
 
 	return maxLength * maxLength * max<bigint>(adjustedExpLength, 1) / 100;
 }
