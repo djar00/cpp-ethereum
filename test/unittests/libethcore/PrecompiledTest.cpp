@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_CASE(modexpCostFermatTheorem)
 		"fffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2f");
 	auto res = cost(bytesConstRef(in.data(), in.size()));
 
-	BOOST_REQUIRE_EQUAL(static_cast<int>(res), 1638);
+	BOOST_REQUIRE_EQUAL(static_cast<int>(res), 2611);
 }
 
 BOOST_AUTO_TEST_CASE(modexpCostTooLarge)
